@@ -10,14 +10,14 @@ class Client(models.Model):
     email = models.EmailField(verbose_name='Email')
     comment = models.CharField(max_length=150, verbose_name='Комментарий', **NULLABLE)
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='владелец клиента')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='владелец клиента')
 
 
 class Message(models.Model):
     theme = models.CharField(max_length=150, verbose_name='тема письма')
     body = models.TextField(verbose_name='содержание письма')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='владелец сообщения')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='владелец сообщения')
 
 
 class SettingsMailing(models.Model):
@@ -44,7 +44,7 @@ class SettingsMailing(models.Model):
     status = models.CharField(choices=CHOICE_STATUS, verbose_name='статус рассылки')
 
     is_active = models.BooleanField(default=True, verbose_name='активность')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='владелец рассылки')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='владелец рассылки')
 
 
 class LogsMailing(models.Model):
