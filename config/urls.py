@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('mailings.urls', namespace='mailing')),
     path('admin/', admin.site.urls),
+    path('', include('mailings.urls', namespace='mailing')),
+    path('users/', include('users.urls', namespace='users')),
 ]
