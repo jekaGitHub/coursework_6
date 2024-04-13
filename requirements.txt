@@ -5,3 +5,4 @@ sqlparse==0.4.4
 python-dotenv==1.0.1
 pillow==10.3.0
 ipython==8.23.0
+pytils==0.4.1
