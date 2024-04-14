@@ -1,10 +1,8 @@
 from django.db import models
 
-from users.models import User
+from users.models import User, NULLABLE
 
 # Create your models here.
-
-NULLABLE = {'blank': True, 'null': True}
 
 
 class Client(models.Model):
