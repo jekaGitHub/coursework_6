@@ -7,6 +7,6 @@ from mailings.models import Client
 def index(request):
     context = {
         'object_list': Client.objects.all(),
-        'title': 'Рассылки - наши клиенты'
+        'title': 'Рассылки'
     }
     return render(request, 'mailings/index.html', context)
