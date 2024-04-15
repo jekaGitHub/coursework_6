@@ -47,3 +47,24 @@ class MessageListView(ListView):
     extra_context = {
         'title': 'Сообщения для рассылок'
     }
+
+
+class MessageCreateView(CreateView):
+    model = Message
+    fields = '__all__'
+    success_url = reverse_lazy('mailings:messages')
+
+
+class MessageDetailView(DetailView):
+    model = Message
+
+
+class MessageUpdateView(UpdateView):
+    model = Message
+    fields = '__all__'
+    success_url = reverse_lazy('mailings:messages')
+
+
+class MessageDeleteView(DeleteView):
+    model = Message
+    success_url = reverse_lazy('mailings:messages')
