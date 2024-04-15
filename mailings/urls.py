@@ -6,5 +6,5 @@ from mailings.views import index
 app_name = MailingsConfig.name
 
 urlpatterns = [
-    path('', index)
+    path('', index, name='index'),
 ]
