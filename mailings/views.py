@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from mailings.models import Client
+from mailings.models import Client, Message
 
 
 # Create your views here.
@@ -29,3 +29,21 @@ class ClientCreateView(CreateView):
 
 class ClientDetailView(DetailView):
     model = Client
+
+
+class ClientUpdateView(UpdateView):
+    model = Client
+    fields = '__all__'
+    success_url = reverse_lazy('mailings:clients')
+
+
+class ClientDeleteView(DeleteView):
+    model = Client
+    success_url = reverse_lazy('mailings:clients')
+
+
+class MessageListView(ListView):
+    model = Message
+    extra_context = {
+        'title': 'Сообщения для рассылок'
+    }
