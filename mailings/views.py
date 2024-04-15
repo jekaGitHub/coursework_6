@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from mailings.models import Client
 
@@ -25,3 +25,7 @@ class ClientCreateView(CreateView):
     model = Client
     fields = '__all__'
     success_url = reverse_lazy('mailings:clients')
+
+
+class ClientDetailView(DetailView):
+    model = Client
