@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from mailings.models import Client
 
@@ -10,3 +11,10 @@ def index(request):
         'title': 'Рассылки'
     }
     return render(request, 'mailings/index.html', context)
+
+
+class ClientListView(ListView):
+    model = Client
+    extra_context = {
+        'title': 'Наши клиенты'
+    }
