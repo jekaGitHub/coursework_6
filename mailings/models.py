@@ -49,7 +49,7 @@ class SettingsMailing(models.Model):
 
     name = models.CharField(max_length=150, verbose_name='название')
 
-    clients = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='клиенты')
+    clients = models.ManyToManyField(Client, related_name='clients_mailing', verbose_name='клиенты рассылки')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='сообщения')
 
     start_time = models.DateTimeField(auto_now_add=True, verbose_name='время начала')
