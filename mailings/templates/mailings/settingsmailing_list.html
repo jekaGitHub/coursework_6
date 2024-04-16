@@ -1,0 +1,12 @@
+{% extends 'mailings/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'mailings:create_mailing' %}">Добавить рассылку</a>
+    </div>
+    {% for object in object_list %}
+        {% include 'mailings/includes/inc_settingsmailing.html' %}
+    {% endfor %}
+</div>
+{% endblock %}

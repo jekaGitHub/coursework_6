@@ -1,0 +1,25 @@
+{% extends 'mailings/base.html' %}
+
+{% block content %}
+<div class="col-4">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
+        </div>
+        <div class="card-body">
+            <p><b>Клиенты:</b></p>
+            <textarea class="card-title pricing-card-title">{{ object.clients }}</textarea>
+            <p><b>Сообщение:</b><br>{{ object.message }}</p>
+            <p><b>Настройки:</b></p>
+            <ul>
+                <li><b>Дата начала:</b> <i>{{ object.start_time }}</i></li>
+                <li><b>Дата окончания:</b> <i>{{ object.end_time }}</i></li>
+                <li><b>Период:</b> <i>{{ object.period }}</i></li>
+                <li><b>Статус:</b> <i>{{ object.status }}</i></li>
+            </ul>
+            <p><b>Активность:</b>{{ object.is_active }}</p>
+            <p><b>Владелец:</b> {{ object.user }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
