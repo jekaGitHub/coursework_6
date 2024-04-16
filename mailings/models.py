@@ -27,7 +27,7 @@ class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='владелец сообщения', **NULLABLE)
 
     def __str__(self):
-        return f'{self.pk} {self.theme}'
+        return f'{self.theme}'
 
     class Meta:
         verbose_name = "Сообщение"

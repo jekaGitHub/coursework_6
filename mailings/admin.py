@@ -20,7 +20,7 @@ class MessageAdmin(admin.ModelAdmin):
 
 @admin.register(SettingsMailing)
 class SettingsMailingAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "clients", "message", "start_time", "end_time", "period", "status", "is_active",
+    list_display = ("id", "name", "start_time", "end_time", "period", "status", "is_active",
                     "user",)
     list_filter = ("status", "period", "is_active", "user",)
     search_fields = ("name", "clients",)
