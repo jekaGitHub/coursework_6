@@ -8,7 +8,11 @@
         </div>
         <div class="card-body">
             <p><b>Клиенты:</b></p>
-            <textarea class="card-title pricing-card-title">{{ object.clients }}</textarea>
+            <ul class="card-title pricing-card-title">
+            {% for client in object.clients.all  %}
+                <li>{{ client.fio }}</li>
+            {% endfor %}
+            </ul>
             <p><b>Сообщение:</b><br>{{ object.message }}</p>
             <p><b>Настройки:</b></p>
             <ul>
