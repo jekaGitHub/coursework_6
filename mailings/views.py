@@ -85,3 +85,14 @@ class SettingsMailingCreateView(CreateView):
 
 class SettingsMailingDetailView(DetailView):
     model = SettingsMailing
+
+
+class SettingsMailingUpdateView(UpdateView):
+    model = SettingsMailing
+    fields = '__all__'
+    success_url = reverse_lazy('mailings:mailings')
+
+
+class SettingsMailingDeleteView(DeleteView):
+    model = SettingsMailing
+    success_url = reverse_lazy('mailings:mailings')
