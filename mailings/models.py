@@ -76,7 +76,7 @@ class LogsMailing(models.Model):
     mailing = models.ForeignKey(SettingsMailing, on_delete=models.CASCADE, verbose_name='рассылка')
 
     def __str__(self):
-        return f'{self.pk} {self.date_time_last_attempt}'
+        return f'{self.date_time_last_attempt}'
 
     class Meta:
         verbose_name = "Лог рассылки"
