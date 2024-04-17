@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
@@ -21,10 +22,16 @@ class ClientListView(ListView):
     }
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client
     fields = '__all__'
     success_url = reverse_lazy('mailings:clients')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class ClientDetailView(DetailView):
@@ -49,10 +56,16 @@ class MessageListView(ListView):
     }
 
 
-class MessageCreateView(CreateView):
+class MessageCreateView(LoginRequiredMixin, CreateView):
     model = Message
     fields = '__all__'
     success_url = reverse_lazy('mailings:messages')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class MessageDetailView(DetailView):
@@ -77,10 +90,16 @@ class SettingsMailingListView(ListView):
     }
 
 
-class SettingsMailingCreateView(CreateView):
+class SettingsMailingCreateView(LoginRequiredMixin, CreateView):
     model = SettingsMailing
     fields = '__all__'
     success_url = reverse_lazy('mailings:mailings')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class SettingsMailingDetailView(DetailView):

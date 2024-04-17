@@ -13,8 +13,13 @@
                     <li><a href="{% url 'mailings:clients' %}" class="text-white">Клиенты</a></li>
                     <li><a href="{% url 'mailings:messages' %}" class="text-white">Сообщения</a></li>
                     <li><a href="{% url 'mailings:mailings' %}" class="text-white">Рассылки</a></li>
-                    <li><a href="#" class="text-white">Вход</a></li>
-                    <li><a href="#" class="text-white">Регистрация</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a class="text-white" href="{% url 'users:profile' %}">Профиль</a></li>
+                    <li><a class="text-white" href="{% url 'users:logout' %}">Выход</a></li>
+                    {% else %}
+                    <li><a class="text-white" href="{% url 'users:login' %}">Вход</a></li>
+                    <li><a class="text-white" href="{% url 'users:register' %}">Регистрация</a></li>
+                    {% endif %}
                     <li><a href="#" class="text-white">Блог</a></li>
                 </ul>
             </div>
