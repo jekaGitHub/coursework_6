@@ -1,4 +1,5 @@
 import smtplib
+from datetime import timedelta
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -24,6 +25,9 @@ def monthly_mailing():
 
 def send_mailing(mailings):
     now = timezone.now()
+    day = timedelta(days=1, hours=0, minutes=0)
+    weak = timedelta(days=7, hours=0, minutes=0)
+    month = timedelta(days=30, hours=0, minutes=0)
     for mailing in mailings:
         clients = [client.email for client in mailing.clients.all()]
         try:
@@ -49,4 +53,16 @@ def send_mailing(mailings):
                                        is_status=False,
                                        mailing=mailing)
             log.save()
-        return log
+
+        if mailing.period == 'ежедневно':
+            mailing.next_date = log.date_time_last_attempt + day
+        elif mailing.period == 'еженедельно':
+            mailing.next_date = log.date_time_last_attempt + weak
+        elif mailing.period == 'раз в месяц':
+            mailing.next_date = log.date_time_last_attempt + month
+
+        if mailing.next_date < mailing.end_time:
+            mailing.status = 'создана'
+        else:
+            mailing.status = 'завершена'
+        mailing.save()
