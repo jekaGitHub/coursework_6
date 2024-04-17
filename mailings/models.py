@@ -52,7 +52,7 @@ class SettingsMailing(models.Model):
     clients = models.ManyToManyField(Client, related_name='clients_mailing', verbose_name='клиенты рассылки')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='сообщения')
 
-    start_time = models.DateTimeField(auto_now_add=True, verbose_name='время начала')
+    start_time = models.DateTimeField(verbose_name='время начала')
     end_time = models.DateTimeField(verbose_name='время окончания')
     period = models.CharField(choices=CHOICE_PERIOD, default='daily', verbose_name='периодичность')
     status = models.CharField(choices=CHOICE_STATUS, default='create', verbose_name='статус рассылки')
