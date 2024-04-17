@@ -1,32 +1,16 @@
 import logging
 
-from django.conf import settings
-
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
+from django.conf import settings
 from django.core.management.base import BaseCommand
+from django_apscheduler import util
 from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
-from django_apscheduler import util
 
-from mailings.models import SettingsMailing
+from mailings.services import day_mailing, weekly_mailing, monthly_mailing
 
 logger = logging.getLogger(__name__)
-
-
-def day_mailing():
-    SettingsMailing.objects.filter(period="daily")
-    print("Every day")
-
-
-def weekly_mailing():
-    SettingsMailing.objects.filter(period="weekly")
-    print("Every week")
-
-
-def monthly_mailing():
-    SettingsMailing.objects.filter(period="monthly")
-    print("Every month")
 
 
 # The `close_old_connections` decorator ensures that database connections, that have become
