@@ -16,11 +16,20 @@ def index(request):
     return render(request, 'mailings/index.html', context)
 
 
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     model = Client
     extra_context = {
         'title': 'Наши клиенты'
     }
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        user = self.request.user
+        if user.is_superuser:
+            queryset = queryset
+        else:
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
@@ -50,11 +59,20 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('mailings:clients')
 
 
-class MessageListView(ListView):
+class MessageListView(LoginRequiredMixin, ListView):
     model = Message
     extra_context = {
         'title': 'Сообщения для рассылок'
     }
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        user = self.request.user
+        if user.is_superuser:
+            queryset = queryset
+        else:
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
 
 class MessageCreateView(LoginRequiredMixin, CreateView):
@@ -84,11 +102,20 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('mailings:messages')
 
 
-class SettingsMailingListView(ListView):
+class SettingsMailingListView(LoginRequiredMixin, ListView):
     model = SettingsMailing
     extra_context = {
         'title': 'Рассылки'
     }
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        user = self.request.user
+        if user.groups.filter(name="manager") or user.is_superuser:
+            queryset = queryset
+        else:
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
 
 class SettingsMailingCreateView(LoginRequiredMixin, CreateView):
