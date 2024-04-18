@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
+from mailings.forms import SettingsMailingForm, MessageForm, ClientForm
 from mailings.models import Client, Message, SettingsMailing
 
 
@@ -24,7 +25,7 @@ class ClientListView(ListView):
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client
-    fields = '__all__'
+    form_class = ClientForm
     success_url = reverse_lazy('mailings:clients')
 
     def form_valid(self, form):
@@ -40,7 +41,7 @@ class ClientDetailView(DetailView):
 
 class ClientUpdateView(UpdateView):
     model = Client
-    fields = '__all__'
+    form_class = ClientForm
     success_url = reverse_lazy('mailings:clients')
 
 
@@ -58,7 +59,7 @@ class MessageListView(ListView):
 
 class MessageCreateView(LoginRequiredMixin, CreateView):
     model = Message
-    fields = '__all__'
+    form_class = MessageForm
     success_url = reverse_lazy('mailings:messages')
 
     def form_valid(self, form):
@@ -74,7 +75,7 @@ class MessageDetailView(DetailView):
 
 class MessageUpdateView(UpdateView):
     model = Message
-    fields = '__all__'
+    form_class = MessageForm
     success_url = reverse_lazy('mailings:messages')
 
 
@@ -92,7 +93,7 @@ class SettingsMailingListView(ListView):
 
 class SettingsMailingCreateView(LoginRequiredMixin, CreateView):
     model = SettingsMailing
-    fields = '__all__'
+    form_class = SettingsMailingForm
     success_url = reverse_lazy('mailings:mailings')
 
     def form_valid(self, form):
@@ -106,9 +107,9 @@ class SettingsMailingDetailView(DetailView):
     model = SettingsMailing
 
 
-class SettingsMailingUpdateView(UpdateView):
+class SettingsMailingUpdateView(LoginRequiredMixin, UpdateView):
     model = SettingsMailing
-    fields = '__all__'
+    form_class = SettingsMailingForm
     success_url = reverse_lazy('mailings:mailings')
 
 
