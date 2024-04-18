@@ -5,12 +5,13 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 
 from mailings.forms import SettingsMailingForm, MessageForm, ClientForm
 from mailings.models import Client, Message, SettingsMailing
+from blog.models import Article
 
 
 # Create your views here.
 def index(request):
     context = {
-        'object_list': Client.objects.all(),
+        'object_list': Article.objects.all()[:3],
         'title': 'Статистика по рассылкам'
     }
     return render(request, 'mailings/index.html', context)
