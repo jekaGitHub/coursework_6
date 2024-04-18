@@ -1,0 +1,18 @@
+{% extends 'mailings/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col-4">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h2 class="my-0 font-weight-normal">{{ object.title }}</h2>
+        </div>
+        <img src="{{ object.image | media_filter }}" alt="Article Image" class="img-fluid">
+        <div class="card-body">
+            <p class="list-unstyled mt-3 mb-4 text-start m-3">{{ object.description }}</p>
+            <p>Дата создания: {{ object.created_at }}</p>
+            <hr>
+            <span>Просмотры: {{ object.views_count }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

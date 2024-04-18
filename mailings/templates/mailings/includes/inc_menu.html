@@ -20,7 +20,7 @@
                     <li><a class="text-white" href="{% url 'users:login' %}">Вход</a></li>
                     <li><a class="text-white" href="{% url 'users:register' %}">Регистрация</a></li>
                     {% endif %}
-                    <li><a href="#" class="text-white">Блог</a></li>
+                    <li><a href="{% url 'blog:list_articles' %}" class="text-white">Блог</a></li>
                 </ul>
             </div>
         </div>
