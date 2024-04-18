@@ -30,22 +30,22 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        self.object.user = self.request.user
+        self.object.owner = self.request.user
         self.object.save()
         return super().form_valid(form)
 
 
-class ClientDetailView(DetailView):
+class ClientDetailView(LoginRequiredMixin, DetailView):
     model = Client
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('mailings:clients')
 
 
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(LoginRequiredMixin, DeleteView):
     model = Client
     success_url = reverse_lazy('mailings:clients')
 
@@ -64,22 +64,22 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        self.object.user = self.request.user
+        self.object.owner = self.request.user
         self.object.save()
         return super().form_valid(form)
 
 
-class MessageDetailView(DetailView):
+class MessageDetailView(LoginRequiredMixin, DetailView):
     model = Message
 
 
-class MessageUpdateView(UpdateView):
+class MessageUpdateView(LoginRequiredMixin, UpdateView):
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy('mailings:messages')
 
 
-class MessageDeleteView(DeleteView):
+class MessageDeleteView(LoginRequiredMixin, DeleteView):
     model = Message
     success_url = reverse_lazy('mailings:messages')
 
@@ -98,12 +98,12 @@ class SettingsMailingCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        self.object.user = self.request.user
+        self.object.owner = self.request.user
         self.object.save()
         return super().form_valid(form)
 
 
-class SettingsMailingDetailView(DetailView):
+class SettingsMailingDetailView(LoginRequiredMixin, DetailView):
     model = SettingsMailing
 
 
@@ -113,6 +113,6 @@ class SettingsMailingUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('mailings:mailings')
 
 
-class SettingsMailingDeleteView(DeleteView):
+class SettingsMailingDeleteView(LoginRequiredMixin, DeleteView):
     model = SettingsMailing
     success_url = reverse_lazy('mailings:mailings')
