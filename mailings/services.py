@@ -55,14 +55,14 @@ def send_mailing(mailings):
             log.save()
 
         if mailing.period == 'ежедневно':
-            mailing.next_date = log.date_time_last_attempt + day
+            mailing.start_time = log.date_time_last_attempt + day
         elif mailing.period == 'еженедельно':
-            mailing.next_date = log.date_time_last_attempt + weak
+            mailing.start_time = log.date_time_last_attempt + weak
         elif mailing.period == 'раз в месяц':
-            mailing.next_date = log.date_time_last_attempt + month
+            mailing.start_time = log.date_time_last_attempt + month
 
-        if mailing.next_date < mailing.end_time:
-            mailing.status = 'создана'
+        if mailing.start_time < mailing.end_time:
+            mailing.status = 'Запущена'
         else:
-            mailing.status = 'завершена'
+            mailing.status = 'Завершена'
         mailing.save()

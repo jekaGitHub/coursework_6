@@ -66,6 +66,8 @@ class SettingsMailing(models.Model):
     class Meta:
         verbose_name = "Настройки рассылки"
         verbose_name_plural = "Настройки рассылок"
+        permissions = [("set_is_activated",
+                        "Может менять активность рассылки")]
 
 
 class LogsMailing(models.Model):
